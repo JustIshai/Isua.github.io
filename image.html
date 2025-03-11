@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Script Button</title>
+</head>
+<body>
+
+    <!-- The image button -->
+    <img src="copy-icon.png" alt="Copy Script" id="copyButton" style="cursor: pointer; width: 50px;">
+
+    <!-- The script to be copied (hidden) -->
+    <textarea id="scriptText" style="position: absolute; left: -9999px;">
+print("Hello, Roblox!")
+    </textarea>
+
+    <script>
+        document.getElementById("copyButton").addEventListener("click", function() {
+            let scriptText = document.getElementById("scriptText");
+
+            // Select and copy text
+            scriptText.select();
+            scriptText.setSelectionRange(0, 99999); // For mobile
+            document.execCommand("copy");
+
+            // Optional: Alert user
+            alert("Script copied to clipboard!");
+        });
+    </script>
+
+</body>
+</html>
