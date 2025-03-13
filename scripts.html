@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts - Isua</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Roblox Script Library</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="scripts.html">Scripts</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Click to Copy a Script</h2>
+
+        <div class="script-container">
+            <p>Basic Print Script</p>
+            <button onclick="copyScript('print(\"Hello, Roblox!\")')">Copy</button>
+        </div>
+
+        <div class="script-container">
+            <p>Kill Player Script</p>
+            <button onclick="copyScript('game.Players.LocalPlayer.Character.Humanoid.Health = 0')">Copy</button>
+        </div>
+    </section>
+
+    <script>
+        function copyScript(scriptText) {
+            navigator.clipboard.writeText(scriptText).then(() => {
+                alert("Script copied to clipboard!");
+            });
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Isua.com</p>
+    </footer>
+</body>
+</html>
