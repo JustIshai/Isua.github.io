@@ -27,14 +27,16 @@ function downloadScript() {
     link.click();
 }
 
-// Run Lua Script Function (Using Fengari)
+// Simulate Running Script in Roblox Studio
 function runLua() {
     let scriptText = editor.getValue();
-    let outputBox = document.getElementById("output");
-    try {
-        let result = fengari.load(scriptText)(); // Execute Lua
-        outputBox.innerText = "Lua Output:\n" + result;
-    } catch (error) {
-        outputBox.innerText = "Error: " + error;
-    }
+    let robloxScript = `
+    local function runScript()
+        ${scriptText}
+    end
+    runScript()
+    `;
+
+    navigator.clipboard.writeText(robloxScript);
+    alert("Script copied! Paste it into Roblox Studio's command bar.");
 }
