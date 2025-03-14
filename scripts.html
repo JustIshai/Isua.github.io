@@ -1,55 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Scripts - Isua</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Roblox Script Library</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="scripts.html">Scripts</a>
-            <a href="editor.html">Editor</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <button id="theme-toggle">🌙 Dark Mode</button>
-    </header>
+<section>
+    <h2>Click a Button to Copy a Script</h2>
 
-    <section>
-        <h2>Click a Button to Copy a Script</h2>
+    <div class="script-box">
+        <h3>Basic Print Script</h3>
+        <pre id="script1">print("Hello, Roblox!")</pre>
+        <button onclick="copyScript('script1')">Copy</button>
+    </div>
 
-        <div class="script-box">
-            <h3>Basic Print Script</h3>
-            <pre id="script1">print("Hello, Roblox!")</pre>
-            <button onclick="copyScript('script1')">Copy</button>
-        </div>
+    <div class="script-box">
+        <h3>Kill Player Script</h3>
+        <pre id="script2">game.Players.LocalPlayer.Character.Humanoid.Health = 0</pre>
+        <button onclick="copyScript('script2')">Copy</button>
+    </div>
 
-        <div class="script-box">
-            <h3>Kill Player Script</h3>
-            <pre id="script2">game.Players.LocalPlayer.Character.Humanoid.Health = 0</pre>
-            <button onclick="copyScript('script2')">Copy</button>
-        </div>
+    <div class="script-box">
+        <h3>Speed Boost Script</h3>
+        <pre id="script3">game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50</pre>
+        <button onclick="copyScript('script3')">Copy</button>
+    </div>
 
-        <div class="script-box">
-            <h3>Speed Boost Script</h3>
-            <pre id="script3">game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50</pre>
-            <button onclick="copyScript('script3')">Copy</button>
-        </div>
+    <div class="script-box">
+        <h3>Fly Script (Press F to Fly)</h3>
+        <pre id="scriptFly">local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 
-        <div class="script-box">
-            <h3>Fly Script</h3>
-            <pre id="script4">loadstring(game:HttpGet("https://pastebin.com/raw/FlyScript"))()</pre>
-            <button onclick="copyScript('script4')">Copy</button>
-        </div>
-    </section>
+local UIS = game:GetService("UserInputService")
+local Flying = false
+local Speed = 50
+local BodyVelocity
 
-    <script src="script.js"></script>
+function StartFlying()
+    if Flying then return end
+    Flying = true
 
-    <footer>
-        <p>&copy; 2025 Isua.com</p>
-    </footer>
-</body>
-</html>
+    BodyVelocity = Instance.new("BodyVelocity")
+    BodyVelocity.Velocity = Vector3.new(0, Speed, 0)
+    BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+    BodyVelocity.Parent = Character.HumanoidRootPart
+
+    UIS.InputBegan:Connect(function(input)
+        if input.KeyCode == Enum.KeyCode.W then
+            BodyVelocity.Velocity = Character.HumanoidRootPart.CFrame.LookVector * Speed
+        elseif input.KeyCode == Enum.KeyCode.S then
+            BodyVelocity.Velocity = -Character.HumanoidRootPart.CFrame.LookVector * Speed
+        elseif input.KeyCode == Enum.KeyCode.Space then
+            BodyVelocity.Velocity = Vector3.new(0, Speed, 0)
+        elseif input.KeyCode == Enum.KeyCode.LeftShift then
+            BodyVelocity.Velocity = Vector3.new(0, -Speed, 0)
+        end
+    end)
+end
+
+function StopFlying()
+    Flying = false
+    if BodyVelocity then
+        BodyVelocity:Destroy()
+    end
+end
+
+UIS.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.F then
+        if Flying then
+            StopFlying()
+        else
+            StartFlying()
+        end
+    end
+end)</pre>
+        <button onclick="copyScript('scriptFly')">Copy</button>
+    </div>
+
+    <div class="script-box">
+        <h3>ESP Script (See Players Through Walls)</h3>
+        <pre id="scriptESP">for i,v in pairs(game.Players:GetPlayers()) do
+    if v ~= game.Players.LocalPlayer then
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = v.Character
+        highlight.FillColor = Color3.fromRGB(255, 0, 0)
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+    end
+end</pre>
+        <button onclick="copyScript('scriptESP')">Copy</button>
+    </div>
+
+    <div class="script-box">
+        <h3>Teleport Script (Click Anywhere to Teleport)</h3>
+        <pre id="scriptTeleport">local UIS = game:GetService("UserInputService")
+local Player = game.Players.LocalPlayer
+
+UIS.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        local mouse = Player:GetMouse()
+        Player.Character.HumanoidRootPart.CFrame = CFrame.new(mouse.Hit.p)
+    end
+end)</pre>
+        <button onclick="copyScript('scriptTeleport')">Copy</button>
+    </div>
+
+    <div class="script-box">
+        <h3>Invisible Script</h3>
+        <pre id="scriptInvisible">local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+
+for i,v in pairs(Character:GetChildren()) do
+    if v:IsA("BasePart") then
+        v.Transparency = 1
+    end
+end</pre>
+        <button onclick="copyScript('scriptInvisible')">Copy</button>
+    </div>
+
+    <div class="script-box">
+        <h3>God Mode Script</h3>
+        <pre id="scriptGodMode">local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+Character.Humanoid.MaxHealth = math.huge
+Character.Humanoid.Health = math.huge</pre>
+        <button onclick="copyScript('scriptGodMode')">Copy</button>
+    </div>
+</section>
